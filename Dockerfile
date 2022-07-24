@@ -1,9 +1,9 @@
 FROM composer
 
-WORKDIR /var/www/html
+WORKDIR /app
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 COPY ./ .
-RUN composer install
-RUN php artisan key:generate
+RUN composer install --no-scripts
 
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
